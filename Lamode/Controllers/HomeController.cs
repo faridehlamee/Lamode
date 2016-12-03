@@ -22,24 +22,37 @@ namespace Lamode.Controllers
     {
         public static async Task StartCrawlerAsync()
         {//
-            var url = "http://www.imdb.com/imdbpicks/celebrity-doppelgangers/rg1875155712?page=1&pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=&pf_rd_r=0Y883GKBY1B31SSGVWA7&pf_rd_s=center-3&pf_rd_t=15081&pf_rd_i=&ref_=pks_mg_mi_mi_sm";
-            var httpClient = new HttpClient();
-            var html = await httpClient.GetStringAsync(url);
-            //HTML Agility Pack helps us to pars html and enables the application to read DOM.
-            //We install it from NuGet Package
-            var htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(html);
-            var aTags = htmlDocument.DocumentNode.Descendants("a").
-               Where(node => node.GetAttributeValue("itemprop", "").
-               Equals("thumbnailUrl")).ToList();
+            Artist artist = new Artist();
+            ModelsArtist modelArtist = new ModelsArtist();
+            lamodeEntities db = new lamodeEntities();
+            string[] urlImdbPhotos = { "17SBE0MBP8AWKVKZ894X", "0V28EQVZT2QPJ3E1N0KX", "1WGZMVP0J8086Q09SJ6Z" };
+         
+                        string url = "http://www.imdb.com/imdbpicks/celebrity-doppelgangers/rg1875155712?page=3"  +
+                                    "&pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=&pf_rd_r=" + "1WGZMVP0J8086Q09SJ6Z" + 
+                                    "&pf_rd_s=center-3&pf_rd_t=15081&pf_rd_i=&ref_=pks_mg_mi_mi_sm";
+                        var httpClient = new HttpClient();
+                        var html = await httpClient.GetStringAsync(url);
+                        //HTML Agility Pack helps us to pars html and enables the application to read DOM.
+                        //We install it from NuGet Package
+                        var htmlDocument = new HtmlDocument();
+                        htmlDocument.LoadHtml(html);
+                        var aTags = htmlDocument.DocumentNode.Descendants("a").
+                                    Where(node => node.GetAttributeValue("itemprop", "").
+                                    Equals("thumbnailUrl")).ToList();
 
-            foreach(var a in aTags)
-            {
-                var title = a.GetAttributeValue("title", "");
-                var imageUrl = a.Descendants("img").FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value;
-                var link = a.GetAttributeValue("href", "");
-            }
-
+                        foreach (var a in aTags)
+                        {
+                            //? says if the amount is not null do something
+                            var title = a?.GetAttributeValue("title", "");
+                            var imageUrl = a?.Descendants("img")?.FirstOrDefault()?.ChildAttributes("src")?.FirstOrDefault()?.Value;
+                            var link = a?.GetAttributeValue("href", "");
+                            artist.FullName = title;
+                            artist.Img = imageUrl;
+                            artist.Link = link;
+                            db.Artists.Add(artist);
+                            db.SaveChanges();
+                        }
+ 
         }
         public ActionResult Index()
         {

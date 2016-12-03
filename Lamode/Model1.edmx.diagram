@@ -21,6 +21,7 @@
         <AssociationConnector Association="lamodeModel.FK__City__StateId__72C60C4A" ManuallyRouted="false" />
         <AssociationConnector Association="lamodeModel.FK__State__CountryId__6FE99F9F" ManuallyRouted="false" />
         <AssociationConnector Association="lamodeModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="lamodeModel.Artist" Width="1.5" PointX="7.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

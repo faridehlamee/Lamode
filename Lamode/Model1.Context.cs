@@ -35,5 +35,6 @@ namespace Lamode
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
+        public virtual DbSet<Artist> Artists { get; set; }
     }
 }
