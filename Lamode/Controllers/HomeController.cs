@@ -85,6 +85,28 @@ namespace Lamode.Controllers
 
             return View();
         }
+        [HttpGet]
+        public ActionResult AddImage()
+        {
+
+            Photo photo = new Photo();
+            return View(photo);
+        }
+        [HttpPost]
+        public ActionResult AddImage(Photo model, HttpPostedFileBase image1, AspNetUser user)
+        {
+            lamodeEntities db = new lamodeEntities();
+            if(image1 != null)
+            {
+                model.Photo1 = new byte[image1.ContentLength];
+                image1.InputStream.Read(model.Photo1, 0, image1.ContentLength);
+
+            }
+            db.Photos.Add(model);
+            db.SaveChanges();
+            
+            return View(model);
+        }
 
         [HttpGet]
         public ActionResult Login()
@@ -141,7 +163,7 @@ namespace Lamode.Controllers
 
                     if (role[0] == "Admin")
                     {
-                        return RedirectToAction("AdminOnly", "Home");
+                        return RedirectToAction("AdminOnly", "Home",user);
                     }
                     else if (role[0] == "VIPUser")
                     {
@@ -334,9 +356,9 @@ namespace Lamode.Controllers
         [Authorize(Roles = "Admin")]
         // To allow more than one role access use syntax like the following:
         // [Authorize(Roles="Admin, Staff")]
-        public ActionResult AdminOnly()
+        public ActionResult AdminOnly(AspNetUser user)
         {
-            
+            ViewBag.AdminUser = user;
             return View();
         }
 

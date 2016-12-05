@@ -123,6 +123,7 @@
           </Key>
           <Property Name="PhotoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id" Type="nvarchar" MaxLength="128" />
+          <Property Name="Nudity" Type="bit" />
           <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="State">
@@ -175,7 +176,7 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Photo__Id__778AC167">
+        <Association Name="FK__Photo__Id__7A672E12">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -286,7 +287,7 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
             <End Role="State" EntitySet="State" />
             <End Role="City" EntitySet="City" />
           </AssociationSet>
-          <AssociationSet Name="FK__Photo__Id__778AC167" Association="Self.FK__Photo__Id__778AC167">
+          <AssociationSet Name="FK__Photo__Id__7A672E12" Association="Self.FK__Photo__Id__7A672E12">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Photo" EntitySet="Photo" />
           </AssociationSet>
@@ -574,6 +575,7 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Photo1" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="AspNetUser" Relationship="lamodeModel.FK__Photo__Id__778AC167" FromRole="Photo" ToRole="AspNetUser" />
+          <Property Name="Nudity" Type="Boolean" />
         </EntityType>
         <Association Name="FK__Photo__Id__778AC167">
           <End Type="lamodeModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
@@ -735,6 +737,7 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
           <EntitySetMapping Name="Photos">
             <EntityTypeMapping TypeName="lamodeModel.Photo">
               <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="Nudity" ColumnName="Nudity" />
                 <ScalarProperty Name="Photo1" ColumnName="Photo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
