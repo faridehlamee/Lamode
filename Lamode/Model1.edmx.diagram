@@ -22,6 +22,8 @@
         <AssociationConnector Association="lamodeModel.FK__State__CountryId__6FE99F9F" ManuallyRouted="false" />
         <AssociationConnector Association="lamodeModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="lamodeModel.Artist" Width="1.5" PointX="7.375" PointY="6.75" />
+        <EntityTypeShape EntityType="lamodeModel.Photo" Width="1.5" PointX="5.25" PointY="12.875" />
+        <AssociationConnector Association="lamodeModel.FK__Photo__Id__778AC167" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

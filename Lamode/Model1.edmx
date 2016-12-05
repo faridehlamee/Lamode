@@ -117,6 +117,14 @@
           <Property Name="CountryId" Type="int" Nullable="false" />
           <Property Name="CountryName" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="State">
           <Key>
             <PropertyRef Name="StateId" />
@@ -164,6 +172,18 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
             </Principal>
             <Dependent Role="City">
               <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Photo__Id__778AC167">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -246,6 +266,7 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
             <DefiningQuery>SELECT 
@@ -264,6 +285,10 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
           <AssociationSet Name="FK__City__StateId__72C60C4A" Association="Self.FK__City__StateId__72C60C4A">
             <End Role="State" EntitySet="State" />
             <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Photo__Id__778AC167" Association="Self.FK__Photo__Id__778AC167">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Photo" EntitySet="Photo" />
           </AssociationSet>
           <AssociationSet Name="FK__State__CountryId__6FE99F9F" Association="Self.FK__State__CountryId__6FE99F9F">
             <End Role="Country" EntitySet="Country" />
@@ -377,6 +402,7 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Photos" Relationship="lamodeModel.FK__Photo__Id__778AC167" FromRole="AspNetUser" ToRole="Photo" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -525,6 +551,11 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="Artists" EntityType="lamodeModel.Artist" />
+          <EntitySet Name="Photos" EntityType="lamodeModel.Photo" />
+          <AssociationSet Name="FK__Photo__Id__778AC167" Association="lamodeModel.FK__Photo__Id__778AC167">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Artist">
           <Key>
@@ -535,6 +566,27 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
           <Property Name="Img" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Link" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Photo1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="lamodeModel.FK__Photo__Id__778AC167" FromRole="Photo" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="FK__Photo__Id__778AC167">
+          <End Type="lamodeModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="lamodeModel.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -677,6 +729,15 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
                 <ScalarProperty Name="Img" ColumnName="Img" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="lamodeModel.Photo">
+              <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="Photo1" ColumnName="Photo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

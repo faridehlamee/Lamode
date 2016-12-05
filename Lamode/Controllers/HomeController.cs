@@ -21,38 +21,64 @@ namespace Lamode.Controllers
     public class HomeController : Controller
     {
         public static async Task StartCrawlerAsync()
-        {//
+        {
             Artist artist = new Artist();
             ModelsArtist modelArtist = new ModelsArtist();
             lamodeEntities db = new lamodeEntities();
-            string[] urlImdbPhotos = { "17SBE0MBP8AWKVKZ894X", "0V28EQVZT2QPJ3E1N0KX", "1WGZMVP0J8086Q09SJ6Z" };
-         
-                        string url = "http://www.imdb.com/imdbpicks/celebrity-doppelgangers/rg1875155712?page=3"  +
-                                    "&pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=&pf_rd_r=" + "1WGZMVP0J8086Q09SJ6Z" + 
-                                    "&pf_rd_s=center-3&pf_rd_t=15081&pf_rd_i=&ref_=pks_mg_mi_mi_sm";
-                        var httpClient = new HttpClient();
-                        var html = await httpClient.GetStringAsync(url);
-                        //HTML Agility Pack helps us to pars html and enables the application to read DOM.
-                        //We install it from NuGet Package
-                        var htmlDocument = new HtmlDocument();
-                        htmlDocument.LoadHtml(html);
-                        var aTags = htmlDocument.DocumentNode.Descendants("a").
-                                    Where(node => node.GetAttributeValue("itemprop", "").
-                                    Equals("thumbnailUrl")).ToList();
 
-                        foreach (var a in aTags)
-                        {
-                            //? says if the amount is not null do something
-                            var title = a?.GetAttributeValue("title", "");
-                            var imageUrl = a?.Descendants("img")?.FirstOrDefault()?.ChildAttributes("src")?.FirstOrDefault()?.Value;
-                            var link = a?.GetAttributeValue("href", "");
-                            artist.FullName = title;
-                            artist.Img = imageUrl;
-                            artist.Link = link;
-                            db.Artists.Add(artist);
-                            db.SaveChanges();
-                        }
- 
+            // Getting models names from imdb.com
+
+            //string[] urlImdbPhotos = { "17SBE0MBP8AWKVKZ894X", "0V28EQVZT2QPJ3E1N0KX", "1WGZMVP0J8086Q09SJ6Z" };
+
+            //            string url = "http://www.imdb.com/imdbpicks/celebrity-doppelgangers/rg1875155712?page=3"  +
+            //                        "&pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=&pf_rd_r=" + "1WGZMVP0J8086Q09SJ6Z" + 
+            //                        "&pf_rd_s=center-3&pf_rd_t=15081&pf_rd_i=&ref_=pks_mg_mi_mi_sm";
+            //            var httpClient = new HttpClient();
+            //            var html = await httpClient.GetStringAsync(url);
+            //            //HTML Agility Pack helps us to pars html and enables the application to read DOM.
+            //            //We install it from NuGet Package
+            //            var htmlDocument = new HtmlDocument();
+            //            htmlDocument.LoadHtml(html);
+            //            var aTags = htmlDocument.DocumentNode.Descendants("a").
+            //                        Where(node => node.GetAttributeValue("itemprop", "").
+            //                        Equals("thumbnailUrl")).ToList();
+
+            //            foreach (var a in aTags)
+            //            {
+            //                //? says if the amount is not null do something
+            //                var title = a?.GetAttributeValue("title", "");
+            //                var imageUrl = a?.Descendants("img")?.FirstOrDefault()?.ChildAttributes("src")?.FirstOrDefault()?.Value;
+            //                var link = a?.GetAttributeValue("href", "");
+            //                artist.FullName = title;
+            //                artist.Img = imageUrl;
+            //                artist.Link = link;
+            //                db.Artists.Add(artist);
+            //                db.SaveChanges();
+            //            }
+
+            string url = "http://www.modelmayhem.com/";
+            var httpClient = new HttpClient();
+            var html = await httpClient.GetStringAsync(url);
+            //HTML Agility Pack helps us to pars html and enables the application to read DOM.
+            //We install it from NuGet Package
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(html);
+            var divs = htmlDocument.DocumentNode.Descendants("div").
+                        Where(node => node.GetAttributeValue("class", "").
+                        Equals("slide")).ToList();
+
+            foreach (var a in divs)
+            {
+                //? says if the amount is not null do something
+                var title = a?.GetAttributeValue("title", "");
+                var imageUrl = a?.Descendants("img")?.FirstOrDefault()?.ChildAttributes("src")?.FirstOrDefault()?.Value;
+                var link = a?.GetAttributeValue("href", "");
+                artist.FullName = title;
+                artist.Img = imageUrl;
+                artist.Link = link;
+                db.Artists.Add(artist);
+                db.SaveChanges();
+            }
         }
         public ActionResult Index()
         {
