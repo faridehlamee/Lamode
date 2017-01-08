@@ -26,8 +26,8 @@ namespace Lamode.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=lamode.database.windows.net;Initial Catalog=lamode;User ID=lamode;Pas" +
-            "sword=FHp3003976")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=184.168.194.78;Initial Catalog=Lamode;User ID=Lamode;Password=Iloveyo" +
+            "u1")]
         public string Setting {
             get {
                 return ((string)(this["Setting"]));

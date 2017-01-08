@@ -14,7 +14,7 @@ namespace Lamode
     
     public partial class Artist
     {
-        public int ID { get; set; }
+        public int ArtistId { get; set; }
         public string FullName { get; set; }
         public string Img { get; set; }
         public string Link { get; set; }

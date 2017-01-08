@@ -24,7 +24,7 @@ namespace Lamode
             {
                 var name = User.Identity.Name; // Get current user name.
 
-                lamodeEntities context = new lamodeEntities();
+                LamodeEntities context = new LamodeEntities();
                 var user = context.AspNetUsers.Where(u => u.UserName == name).FirstOrDefault();
                 IQueryable<string> roleQuery = from u in context.AspNetUsers
                                                from r in u.AspNetRoles

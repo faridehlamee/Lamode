@@ -17,7 +17,7 @@ namespace Lamode
         public int PhotoId { get; set; }
         public string Id { get; set; }
         public byte[] Photo1 { get; set; }
-        public Nullable<bool> Nudity { get; set; }
+        public bool Nudity { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
     }
