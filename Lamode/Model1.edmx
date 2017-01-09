@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="lamodeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LamodeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -14,42 +14,6 @@
           <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="Model" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AdditionalUserInfo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="DateOfBirth" Type="date" />
-          <Property Name="Height" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Weight" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="ColorEyes" Type="varchar" MaxLength="10" />
-          <Property Name="TellUsMore" Type="varchar" MaxLength="255" />
-          <Property Name="Experience" Type="bit" />
-          <Property Name="NudePhoto" Type="bit" />
-          <Property Name="Nationality" Type="varchar" MaxLength="20" />
-          <Property Name="Province" Type="varchar" MaxLength="20" />
-          <Property Name="City" Type="varchar" MaxLength="20" />
-          <Property Name="Country" Type="varchar" MaxLength="20" />
-          <Property Name="ZipCode" Type="varchar" MaxLength="10" />
-          <Property Name="Gender" Type="varchar" MaxLength="15" />
-          <Property Name="Bust" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Hips" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Dress" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Waist" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Cup" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="Shoe" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="CompanyName" Type="varchar" MaxLength="25" />
-          <Property Name="Website" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Artist">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FullName" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Img" Type="varchar" MaxLength="255" />
-          <Property Name="Link" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -102,20 +66,41 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <EntityType Name="City">
+        <EntityType Name="AdditionalUserInfo">
           <Key>
-            <PropertyRef Name="CityId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="CityId" Type="int" Nullable="false" />
-          <Property Name="CityName" Type="varchar" MaxLength="50" />
-          <Property Name="StateId" Type="int" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="Height" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Weight" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="ColorEyes" Type="varchar" MaxLength="10" />
+          <Property Name="TellUsMore" Type="varchar" MaxLength="255" />
+          <Property Name="Experience" Type="bit" />
+          <Property Name="NudePhoto" Type="bit" />
+          <Property Name="Nationality" Type="varchar" MaxLength="20" />
+          <Property Name="Province" Type="varchar" MaxLength="20" />
+          <Property Name="City" Type="varchar" MaxLength="20" />
+          <Property Name="Country" Type="varchar" MaxLength="20" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="10" />
+          <Property Name="Gender" Type="varchar" MaxLength="15" />
+          <Property Name="Bust" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Hips" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Dress" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Waist" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Cup" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Shoe" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="25" />
+          <Property Name="Website" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Country">
+        <EntityType Name="Artist">
           <Key>
-            <PropertyRef Name="CountryId" />
+            <PropertyRef Name="ArtistId" />
           </Key>
-          <Property Name="CountryId" Type="int" Nullable="false" />
-          <Property Name="CountryName" Type="varchar" MaxLength="50" />
+          <Property Name="ArtistId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="128" />
+          <Property Name="Img" Type="nvarchar" MaxLength="128" />
+          <Property Name="Link" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Photo">
           <Key>
@@ -123,36 +108,10 @@
           </Key>
           <Property Name="PhotoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id" Type="nvarchar" MaxLength="128" />
-          <Property Name="Nudity" Type="bit" />
-          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="Photo1" Type="varbinary(max)" />
+          <Property Name="Nudity" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="State">
-          <Key>
-            <PropertyRef Name="StateId" />
-          </Key>
-          <Property Name="StateId" Type="int" Nullable="false" />
-          <Property Name="StateName" Type="varchar" MaxLength="50" />
-          <Property Name="CountryId" Type="int" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="database_firewall_rules">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="start_ip_address" />
-            <PropertyRef Name="end_ip_address" />
-            <PropertyRef Name="create_date" />
-            <PropertyRef Name="modify_date" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="create_date" Type="datetime" Nullable="false" />
-          <Property Name="modify_date" Type="datetime" Nullable="false" />
-        </EntityType>
-        <Association Name="FK__AdditionalUs__Id__5DCAEF64">
+        <Association Name="FK__AdditionalUs__Id__1FCDBCEB">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="AdditionalUserInfo" Type="Self.AdditionalUserInfo" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -164,19 +123,7 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__City__StateId__72C60C4A">
-          <End Role="State" Type="Self.State" Multiplicity="0..1" />
-          <End Role="City" Type="Self.City" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="State">
-              <PropertyRef Name="StateId" />
-            </Principal>
-            <Dependent Role="City">
-              <PropertyRef Name="StateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Photo__Id__7A672E12">
+        <Association Name="FK__Photo__Id__30F848ED">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -185,18 +132,6 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
             </Principal>
             <Dependent Role="Photo">
               <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__State__CountryId__6FE99F9F">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="State" Type="Self.State" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="CountryId" />
-            </Principal>
-            <Dependent Role="State">
-              <PropertyRef Name="CountryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -256,44 +191,23 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="lamodeModelStoreContainer">
+        <EntityContainer Name="LamodeModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AdditionalUserInfo" EntityType="Self.AdditionalUserInfo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Artist" EntityType="Self.Artist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
-            <DefiningQuery>SELECT 
-    [database_firewall_rules].[id] AS [id], 
-    [database_firewall_rules].[name] AS [name], 
-    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
-    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
-    [database_firewall_rules].[create_date] AS [create_date], 
-    [database_firewall_rules].[modify_date] AS [modify_date]
-    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__AdditionalUs__Id__5DCAEF64" Association="Self.FK__AdditionalUs__Id__5DCAEF64">
+          <EntitySet Name="AdditionalUserInfo" EntityType="Self.AdditionalUserInfo" Schema="Lamode" store:Type="Tables" />
+          <EntitySet Name="Artist" EntityType="Self.Artist" Schema="Lamode" store:Type="Tables" />
+          <EntitySet Name="Photo" EntityType="Self.Photo" Schema="Lamode" store:Type="Tables" />
+          <AssociationSet Name="FK__AdditionalUs__Id__1FCDBCEB" Association="Self.FK__AdditionalUs__Id__1FCDBCEB">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AdditionalUserInfo" EntitySet="AdditionalUserInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK__City__StateId__72C60C4A" Association="Self.FK__City__StateId__72C60C4A">
-            <End Role="State" EntitySet="State" />
-            <End Role="City" EntitySet="City" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Photo__Id__7A672E12" Association="Self.FK__Photo__Id__7A672E12">
+          <AssociationSet Name="FK__Photo__Id__30F848ED" Association="Self.FK__Photo__Id__30F848ED">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Photo" EntitySet="Photo" />
-          </AssociationSet>
-          <AssociationSet Name="FK__State__CountryId__6FE99F9F" Association="Self.FK__State__CountryId__6FE99F9F">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="State" EntitySet="State" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -312,10 +226,11 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="lamodeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="LamodeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -325,34 +240,6 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
           <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AdditionalUserInfo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
-          <Property Name="Height" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Weight" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="ColorEyes" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TellUsMore" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Experience" Type="Boolean" />
-          <Property Name="NudePhoto" Type="Boolean" />
-          <Property Name="Nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Province" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Country" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Gender" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Bust" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Hips" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Dress" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Waist" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Cup" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="Shoe" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="CompanyName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__AdditionalUs__Id__5DCAEF64" FromRole="AdditionalUserInfo" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
@@ -399,67 +286,59 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AdditionalUserInfo" Relationship="Self.FK__AdditionalUs__Id__5DCAEF64" FromRole="AspNetUsers" ToRole="AdditionalUserInfo" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AdditionalUserInfo" Relationship="Self.FK__AdditionalUs__Id__1FCDBCEB" FromRole="AspNetUsers" ToRole="AdditionalUserInfo" />
+          <NavigationProperty Name="Photos" Relationship="Self.FK__Photo__Id__30F848ED" FromRole="AspNetUsers" ToRole="Photo" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <NavigationProperty Name="Photos" Relationship="lamodeModel.FK__Photo__Id__778AC167" FromRole="AspNetUser" ToRole="Photo" />
         </EntityType>
-        <EntityType Name="City">
+        <EntityType Name="AdditionalUserInfo">
           <Key>
-            <PropertyRef Name="CityId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="CityId" Type="Int32" Nullable="false" />
-          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="StateId" Type="Int32" />
-          <NavigationProperty Name="State" Relationship="Self.FK__City__StateId__72C60C4A" FromRole="City" ToRole="State" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Height" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Weight" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="ColorEyes" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TellUsMore" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Experience" Type="Boolean" />
+          <Property Name="NudePhoto" Type="Boolean" />
+          <Property Name="Nationality" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Province" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Bust" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Hips" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Dress" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Waist" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Cup" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Shoe" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="CompanyName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__AdditionalUs__Id__1FCDBCEB" FromRole="AdditionalUserInfo" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="Country">
+        <EntityType Name="Artist">
           <Key>
-            <PropertyRef Name="CountryId" />
+            <PropertyRef Name="ArtistId" />
           </Key>
-          <Property Name="CountryId" Type="Int32" Nullable="false" />
-          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="States" Relationship="Self.FK__State__CountryId__6FE99F9F" FromRole="Country" ToRole="State" />
+          <Property Name="ArtistId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Img" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Link" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="State">
+        <EntityType Name="Photo">
           <Key>
-            <PropertyRef Name="StateId" />
+            <PropertyRef Name="PhotoId" />
           </Key>
-          <Property Name="StateId" Type="Int32" Nullable="false" />
-          <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CountryId" Type="Int32" />
-          <NavigationProperty Name="Cities" Relationship="Self.FK__City__StateId__72C60C4A" FromRole="State" ToRole="City" />
-          <NavigationProperty Name="Country" Relationship="Self.FK__State__CountryId__6FE99F9F" FromRole="State" ToRole="Country" />
+          <Property Name="PhotoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Photo1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Nudity" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Photo__Id__30F848ED" FromRole="Photo" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="database_firewall_rules">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="start_ip_address" />
-            <PropertyRef Name="end_ip_address" />
-            <PropertyRef Name="create_date" />
-            <PropertyRef Name="modify_date" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <Association Name="FK__AdditionalUs__Id__5DCAEF64">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="AdditionalUserInfo" Type="Self.AdditionalUserInfo" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AdditionalUserInfo">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -488,27 +367,27 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__City__StateId__72C60C4A">
-          <End Role="State" Type="Self.State" Multiplicity="0..1" />
-          <End Role="City" Type="Self.City" Multiplicity="*" />
+        <Association Name="FK__AdditionalUs__Id__1FCDBCEB">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="AdditionalUserInfo" Type="Self.AdditionalUserInfo" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="State">
-              <PropertyRef Name="StateId" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="City">
-              <PropertyRef Name="StateId" />
+            <Dependent Role="AdditionalUserInfo">
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__State__CountryId__6FE99F9F">
-          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
-          <End Role="State" Type="Self.State" Multiplicity="*" />
+        <Association Name="FK__Photo__Id__30F848ED">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Country">
-              <PropertyRef Name="CountryId" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="State">
-              <PropertyRef Name="CountryId" />
+            <Dependent Role="Photo">
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -516,21 +395,15 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="lamodeEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="LamodeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-          <EntitySet Name="AdditionalUserInfoes" EntityType="Self.AdditionalUserInfo" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="Cities" EntityType="Self.City" />
-          <EntitySet Name="Countries" EntityType="Self.Country" />
-          <EntitySet Name="States" EntityType="Self.State" />
-          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
-          <AssociationSet Name="FK__AdditionalUs__Id__5DCAEF64" Association="Self.FK__AdditionalUs__Id__5DCAEF64">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AdditionalUserInfo" EntitySet="AdditionalUserInfoes" />
-          </AssociationSet>
+          <EntitySet Name="AdditionalUserInfoes" EntityType="Self.AdditionalUserInfo" />
+          <EntitySet Name="Artists" EntityType="Self.Artist" />
+          <EntitySet Name="Photos" EntityType="Self.Photo" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -539,64 +412,27 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK__City__StateId__72C60C4A" Association="Self.FK__City__StateId__72C60C4A">
-            <End Role="State" EntitySet="States" />
-            <End Role="City" EntitySet="Cities" />
+          <AssociationSet Name="FK__AdditionalUs__Id__1FCDBCEB" Association="Self.FK__AdditionalUs__Id__1FCDBCEB">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AdditionalUserInfo" EntitySet="AdditionalUserInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__State__CountryId__6FE99F9F" Association="Self.FK__State__CountryId__6FE99F9F">
-            <End Role="Country" EntitySet="Countries" />
-            <End Role="State" EntitySet="States" />
+          <AssociationSet Name="FK__Photo__Id__30F848ED" Association="Self.FK__Photo__Id__30F848ED">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Photo" EntitySet="Photos" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="Artists" EntityType="lamodeModel.Artist" />
-          <EntitySet Name="Photos" EntityType="lamodeModel.Photo" />
-          <AssociationSet Name="FK__Photo__Id__778AC167" Association="lamodeModel.FK__Photo__Id__778AC167">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="Photo" EntitySet="Photos" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Artist">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FullName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Img" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Link" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Photo">
-          <Key>
-            <PropertyRef Name="PhotoId" />
-          </Key>
-          <Property Name="PhotoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Photo1" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="lamodeModel.FK__Photo__Id__778AC167" FromRole="Photo" ToRole="AspNetUser" />
-          <Property Name="Nudity" Type="Boolean" />
-        </EntityType>
-        <Association Name="FK__Photo__Id__778AC167">
-          <End Type="lamodeModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
-          <End Type="lamodeModel.Photo" Role="Photo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Photo">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="lamodeModelStoreContainer" CdmEntityContainer="lamodeEntities">
+        <EntityContainerMapping StorageEntityContainer="LamodeModelStoreContainer" CdmEntityContainer="LamodeEntities">
           <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="lamodeModel.C__MigrationHistory">
+            <EntityTypeMapping TypeName="LamodeModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
@@ -605,8 +441,53 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="LamodeModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="LamodeModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="LamodeModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="LamodeModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AdditionalUserInfoes">
-            <EntityTypeMapping TypeName="lamodeModel.AdditionalUserInfo">
+            <EntityTypeMapping TypeName="LamodeModel.AdditionalUserInfo">
               <MappingFragment StoreEntitySet="AdditionalUserInfo">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
@@ -633,90 +514,27 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="lamodeModel.AspNetRole">
-              <MappingFragment StoreEntitySet="AspNetRoles">
+          <EntitySetMapping Name="Artists">
+            <EntityTypeMapping TypeName="LamodeModel.Artist">
+              <MappingFragment StoreEntitySet="Artist">
+                <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="LamodeModel.Photo">
+              <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Photo1" ColumnName="Photo1" />
+                <ScalarProperty Name="Nudity" ColumnName="Nudity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="lamodeModel.AspNetUserClaim">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="lamodeModel.AspNetUserLogin">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="lamodeModel.AspNetUser">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cities">
-            <EntityTypeMapping TypeName="lamodeModel.City">
-              <MappingFragment StoreEntitySet="City">
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="CityName" ColumnName="CityName" />
-                <ScalarProperty Name="StateId" ColumnName="StateId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Countries">
-            <EntityTypeMapping TypeName="lamodeModel.Country">
-              <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="States">
-            <EntityTypeMapping TypeName="lamodeModel.State">
-              <MappingFragment StoreEntitySet="State">
-                <ScalarProperty Name="StateId" ColumnName="StateId" />
-                <ScalarProperty Name="StateName" ColumnName="StateName" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="database_firewall_rules">
-            <EntityTypeMapping TypeName="lamodeModel.database_firewall_rules">
-              <MappingFragment StoreEntitySet="database_firewall_rules">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
-                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="lamodeModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="LamodeModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
@@ -724,26 +542,6 @@ warning 6002: The table/view 'lamode.sys.database_firewall_rules' does not have 
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Artists">
-            <EntityTypeMapping TypeName="lamodeModel.Artist">
-              <MappingFragment StoreEntitySet="Artist">
-                <ScalarProperty Name="Link" ColumnName="Link" />
-                <ScalarProperty Name="Img" ColumnName="Img" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Photos">
-            <EntityTypeMapping TypeName="lamodeModel.Photo">
-              <MappingFragment StoreEntitySet="Photo">
-                <ScalarProperty Name="Nudity" ColumnName="Nudity" />
-                <ScalarProperty Name="Photo1" ColumnName="Photo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

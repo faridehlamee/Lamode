@@ -24,7 +24,7 @@ namespace Lamode.Controllers
         {
             Artist artist = new Artist();
             ModelsArtist modelArtist = new ModelsArtist();
-            lamodeEntities db = new lamodeEntities();
+            LamodeEntities db = new LamodeEntities();
 
             // Getting models names from imdb.com
 
@@ -95,13 +95,18 @@ namespace Lamode.Controllers
         [HttpPost]
         public ActionResult AddImage(Photo model, HttpPostedFileBase image1, string Id)
         {
-            lamodeEntities db = new lamodeEntities();
-            
-            if (image1 != null)
+            LamodeEntities db = new LamodeEntities();
+            Photo photo = new Photo();
+            var p1 = db.Photos.Where(p => p.Id == Id).Count();
+            if (image1 != null && p1 <= 15)
             {
                 model.Photo1 = new byte[image1.ContentLength];
                 image1.InputStream.Read(model.Photo1, 0, image1.ContentLength);
                 model.Id = Id;
+
+            }
+            else
+            {
 
             }
             db.Photos.Add(model);
@@ -159,7 +164,7 @@ namespace Lamode.Controllers
                     {
                         IsPersistent = false
                     }, identity);
-                    lamodeEntities context = new lamodeEntities();
+                    LamodeEntities context = new LamodeEntities();
                     var user = context.AspNetUsers.Where(u => u.UserName == login.UserName).FirstOrDefault();
                     var role = manager.GetRoles(user.Id);
 
@@ -173,7 +178,7 @@ namespace Lamode.Controllers
                     }
                     else if (role[0] == "SpecialUser")
                     {
-                        return RedirectToAction("SpecialUser", "Home");
+                        return RedirectToAction("SpecialUser", "Home",  new { @id = user.Id });
                     }
 
 
@@ -217,7 +222,7 @@ namespace Lamode.Controllers
             };
             
             IdentityResult result = manager.Create(identityUser, newUser.Password);
-            lamodeEntities db = new lamodeEntities();
+            LamodeEntities db = new LamodeEntities();
           
             if (result.Succeeded)
             {
@@ -322,7 +327,7 @@ namespace Lamode.Controllers
         [HttpPost]
         public ActionResult AddRole(AspNetRole role)
         {
-            lamodeEntities context = new lamodeEntities();
+            LamodeEntities context = new LamodeEntities();
             context.AspNetRoles.Add(role);
             context.SaveChanges();
             return View();
@@ -331,7 +336,7 @@ namespace Lamode.Controllers
         [HttpGet]
         public ActionResult AddUserToRole()
         {
-            lamodeEntities context = new lamodeEntities();
+            LamodeEntities context = new LamodeEntities();
             AspNetRole aspNetRole = new AspNetRole();
             AspNetUser aspNetUser = new AspNetUser();
             var list = context.AspNetRoles.ToList();
@@ -343,7 +348,7 @@ namespace Lamode.Controllers
         [HttpPost]
         public ActionResult AddUserToRole(string userName, string Id)
         {
-            lamodeEntities context = new lamodeEntities();
+            LamodeEntities context = new LamodeEntities();
 
             AspNetUser user = context.AspNetUsers
                              .Where(u => u.UserName == userName).FirstOrDefault();
@@ -374,8 +379,9 @@ namespace Lamode.Controllers
         [Authorize(Roles = "SpecialUser")]
         // To allow more than one role access use syntax like the following:
         // [Authorize(Roles="Admin, Staff")]
-        public ActionResult SpecialUser()
+        public ActionResult SpecialUser(string Id)
         {
+            ViewBag.SpecialUser = Id;
             return View();
         }
         [Authorize(Roles = "User")]
