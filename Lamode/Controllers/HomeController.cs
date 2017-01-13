@@ -85,36 +85,7 @@ namespace Lamode.Controllers
 
             return View();
         }
-        [HttpGet]
-        public ActionResult AddImage()
-        {
-
-            Photo photo = new Photo();
-            return View(photo);
-        }
-        [HttpPost]
-        public ActionResult AddImage(Photo model, HttpPostedFileBase image1, string Id)
-        {
-            LamodeEntities db = new LamodeEntities();
-            Photo photo = new Photo();
-            var p1 = db.Photos.Where(p => p.Id == Id).Count();
-            if (image1 != null && p1 <= 15)
-            {
-                model.Photo1 = new byte[image1.ContentLength];
-                image1.InputStream.Read(model.Photo1, 0, image1.ContentLength);
-                model.Id = Id;
-
-            }
-            else
-            {
-
-            }
-            db.Photos.Add(model);
-            db.SaveChanges();
-            
-            return View(model);
-        }
-
+        
         [HttpGet]
         public ActionResult Login()
         {
@@ -147,7 +118,7 @@ namespace Lamode.Controllers
 
             if (ModelState.IsValid)
             {
-                if (identityUser != null)
+                if (ValidLogin(login))
                 {
                     IAuthenticationManager authenticationManager
                                            = HttpContext.GetOwinContext().Authentication;
@@ -180,13 +151,10 @@ namespace Lamode.Controllers
                     {
                         return RedirectToAction("SpecialUser", "Home",  new { @id = user.Id });
                     }
-
-
                 }
                 return RedirectToAction("SecureArea", "Home");
                 }
-            
-
+   
             return View();
         }
         
@@ -205,6 +173,7 @@ namespace Lamode.Controllers
             string country = RegionInfo.CurrentRegion.DisplayName;
             ViewBag.country = country;
             ViewBag.registeredPeople = registeredPeople;
+            TempData["registeredPeople"] = registeredPeople;
             ViewBag.oneTwo = oneTwo;
             return View();
         }
@@ -214,7 +183,13 @@ namespace Lamode.Controllers
         {
             ViewBag.registeredPeople = registeredPeople;
             var userStore = new UserStore<IdentityUser>();
-            var manager = new UserManager<IdentityUser>(userStore);
+            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore)
+            {
+                UserLockoutEnabledByDefault = true,
+                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
+                MaxFailedAccessAttemptsBeforeLockout = 3
+            };
+
             var identityUser = new IdentityUser()
             {
                 UserName = newUser.UserName,
@@ -236,9 +211,6 @@ namespace Lamode.Controllers
             var user = manager.Users.FirstOrDefault(u => u.UserName == newUser.UserName);
             //for the rest of data from AspNetUser table
             AdditionalUserInfo additionalUserInfo = new AdditionalUserInfo();
-
-           
-
 
             additionalUserInfo.Id = user.Id;
            
@@ -276,32 +248,48 @@ namespace Lamode.Controllers
                 }
             }
 
-            return RedirectToAction("MoreRegisterationForIndividuals", newUser);
+            return RedirectToAction("MoreRegisterationForIndividuals", "Home", new { @id = user.Id });
         }
-
-        public ActionResult MoreRegisterationForIndividuals(RegisteredUser newUser)
+        [HttpGet]
+        public ActionResult MoreRegisterationForIndividuals()
         {
+
+            string temp = TempData["registeredPeople"].ToString();
+            if (temp == "Model")
+            {
+                return View();
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult MoreRegisterationForIndividuals(RegisteredUser newUser, string Id)
+        {
+            LamodeEntities db = new LamodeEntities();
             var userStore = new UserStore<IdentityUser>();
             var manager = new UserManager<IdentityUser>(userStore);
-            var user = manager.Users.FirstOrDefault(u => u.UserName == newUser.UserName);
+            //var user = manager.Users.FirstOrDefault(u => u.UserName == newUser.UserName);
+            var user1 = db.AdditionalUserInfoes.Where(u1 => u1.Id == Id).FirstOrDefault();
             AdditionalUserInfo additionalUserInfo = new AdditionalUserInfo();
-            additionalUserInfo.Bust = newUser.Bust;
-            additionalUserInfo.ColorEyes = newUser.ColorEyes;
-           
-            additionalUserInfo.Cup = newUser.Cup;
-           
-            additionalUserInfo.Dress = newUser.Dress;
-            additionalUserInfo.Experience = newUser.Experience;
-            additionalUserInfo.Height = newUser.Height;
-            additionalUserInfo.Hips = newUser.Hips;
-            
-            additionalUserInfo.NudePhoto = newUser.NudePhoto;
-            additionalUserInfo.Shoe = newUser.Shoe;
-            
-            additionalUserInfo.Waist = newUser.Waist;
-           
-            additionalUserInfo.Weight = newUser.Weight;
-  
+
+            //  additionalUserInfo.Id = user.Id;
+            user1.Bust = newUser.Bust;
+            user1.ColorEyes = newUser.ColorEyes;
+
+            user1.Cup = newUser.Cup;
+
+            user1.Dress = newUser.Dress;
+            user1.Experience = newUser.Experience;
+            user1.Height = newUser.Height;
+            user1.Hips = newUser.Hips;
+
+            user1.NudePhoto = newUser.NudePhoto;
+            user1.Shoe = newUser.Shoe;
+
+            user1.Waist = newUser.Waist;
+
+            user1.Weight = newUser.Weight;
+          //  db.AdditionalUserInfoes.add(user1);
+            db.SaveChanges();
             return View();
         }
 
@@ -392,8 +380,44 @@ namespace Lamode.Controllers
             return RedirectToAction("SecureArea");
         }
 
+        bool ValidLogin(Login login)
+        {
+            UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
+            UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(userStore)
+            {
+                UserLockoutEnabledByDefault = true,
+                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
+                MaxFailedAccessAttemptsBeforeLockout = 3
+            };
+            var user = userManager.FindByName(login.UserName);
 
+            if (user == null)
+                return false;
 
+            // User is locked out.
+            if (userManager.SupportsUserLockout && userManager.IsLockedOut(user.Id))
+                return false;
+
+            // Validated user was locked out but now can be reset.
+            if (userManager.CheckPassword(user, login.Password))
+            {
+                if (userManager.SupportsUserLockout
+                 && userManager.GetAccessFailedCount(user.Id) > 0)
+                {
+                    userManager.ResetAccessFailedCount(user.Id);
+                }
+            }
+            // Login is invalid so increment failed attempts.
+            else {
+                bool lockoutEnabled = userManager.GetLockoutEnabled(user.Id);
+                if (userManager.SupportsUserLockout && userManager.GetLockoutEnabled(user.Id))
+                {
+                    userManager.AccessFailed(user.Id);
+                    return false;
+                }
+            }
+            return true;
+        }
 
     }
 }
