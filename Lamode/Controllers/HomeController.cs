@@ -118,7 +118,7 @@ namespace Lamode.Controllers
 
             if (ModelState.IsValid)
             {
-                if (ValidLogin(login))
+                if (identityUser != null)
                 {
                     IAuthenticationManager authenticationManager
                                            = HttpContext.GetOwinContext().Authentication;
@@ -183,13 +183,7 @@ namespace Lamode.Controllers
         {
             ViewBag.registeredPeople = registeredPeople;
             var userStore = new UserStore<IdentityUser>();
-            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore)
-            {
-                UserLockoutEnabledByDefault = true,
-                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
-                MaxFailedAccessAttemptsBeforeLockout = 3
-            };
-
+            var manager = new UserManager<IdentityUser>(userStore);
             var identityUser = new IdentityUser()
             {
                 UserName = newUser.UserName,
@@ -201,17 +195,12 @@ namespace Lamode.Controllers
           
             if (result.Succeeded)
             {
-                CreateTokenProvider(manager, EMAIL_CONFIRMATION);
-
-                var code = manager.GenerateEmailConfirmationToken(identityUser.Id);
-                var callbackUrl = Url.Action("ConfirmEmail", "Home",
-                                                new { userId = identityUser.Id, code = code },
-                                                    protocol: Request.Url.Scheme);
-
-                string email = "Please confirm your account by clicking this link: <a href=\""
-                                + callbackUrl + "\">Confirm Registration</a>";
-                ViewBag.FakeConfirmation = email;
-
+                var authenticationManager
+                                  = HttpContext.Request.GetOwinContext().Authentication;
+                var userIdentity = manager.CreateIdentity(identityUser,
+                                           DefaultAuthenticationTypes.ApplicationCookie);
+                authenticationManager.SignIn(new AuthenticationProperties() { },
+                                             userIdentity);
             }
             var user = manager.Users.FirstOrDefault(u => u.UserName == newUser.UserName);
             //for the rest of data from AspNetUser table
@@ -383,72 +372,6 @@ namespace Lamode.Controllers
         public ActionResult NormalUser()
         {
             return RedirectToAction("SecureArea");
-        }
-
-        bool ValidLogin(Login login)
-        {
-            UserStore<IdentityUser> userStore = new UserStore<IdentityUser>();
-            UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(userStore)
-            {
-                UserLockoutEnabledByDefault = true,
-                DefaultAccountLockoutTimeSpan = new TimeSpan(0, 10, 0),
-                MaxFailedAccessAttemptsBeforeLockout = 3
-            };
-            var user = userManager.FindByName(login.UserName);
-
-            if (user == null)
-                return false;
-
-            // User is locked out.
-            if (userManager.SupportsUserLockout && userManager.IsLockedOut(user.Id))
-                return false;
-
-            // Validated user was locked out but now can be reset.
-            if (userManager.CheckPassword(user, login.Password)
-                    && userManager.IsEmailConfirmed(user.Id))
-            {
-                if (userManager.SupportsUserLockout
-                 && userManager.GetAccessFailedCount(user.Id) > 0)
-                {
-                    userManager.ResetAccessFailedCount(user.Id);
-                }
-            }
-            // Login is invalid so increment failed attempts.
-            else {
-                bool lockoutEnabled = userManager.GetLockoutEnabled(user.Id);
-                if (userManager.SupportsUserLockout && userManager.GetLockoutEnabled(user.Id))
-                {
-                    userManager.AccessFailed(user.Id);
-                    return false;
-                }
-            }
-            return true;
-        }
-        const string EMAIL_CONFIRMATION = "EmailConfirmation";
-        const string PASSWORD_RESET = "ResetPassword";
-
-        void CreateTokenProvider(UserManager<IdentityUser> manager, string tokenType)
-        {
-            manager.UserTokenProvider = new EmailTokenProvider<IdentityUser>();
-        }
-
-        public ActionResult ConfirmEmail(string userID, string code)
-        {
-            var userStore = new UserStore<IdentityUser>();
-            UserManager<IdentityUser> manager = new UserManager<IdentityUser>(userStore);
-            var user = manager.FindById(userID);
-            CreateTokenProvider(manager, EMAIL_CONFIRMATION);
-            try
-            {
-                IdentityResult result = manager.ConfirmEmail(userID, code);
-                if (result.Succeeded)
-                    ViewBag.Message = "You are now registered!";
-            }
-            catch
-            {
-                ViewBag.Message = "Validation attempt failed!";
-            }
-            return View();
         }
 
     }
