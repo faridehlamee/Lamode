@@ -353,14 +353,14 @@ namespace Lamode.Controllers
 
         [Authorize(Roles = "VIPUser")]
         // To allow more than one role access use syntax like the following:
-        // [Authorize(Roles="Admin, Staff")]
+        // [Authorize(Roles="VIP User")]
         public ActionResult VIPUser()
         {
             return View();
         }
         [Authorize(Roles = "SpecialUser")]
         // To allow more than one role access use syntax like the following:
-        // [Authorize(Roles="Admin, Staff")]
+        // [Authorize(Roles="Special User")]
         public ActionResult SpecialUser(string Id)
         {
             ViewBag.SpecialUser = Id;
@@ -368,7 +368,7 @@ namespace Lamode.Controllers
         }
         [Authorize(Roles = "User")]
         // To allow more than one role access use syntax like the following:
-        // [Authorize(Roles="Admin, Staff")]
+        // [Authorize(Roles="User")]
         public ActionResult NormalUser()
         {
             return RedirectToAction("SecureArea");

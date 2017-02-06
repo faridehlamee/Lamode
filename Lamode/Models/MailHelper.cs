@@ -24,7 +24,7 @@ namespace Lamode.Models
             const bool USE_HTML = true;
 
             // Get the mail server obtained in the steps described above.
-            const string SMTP_SERVER = "173.201.193.228";
+            const string SMTP_SERVER = "173.201.192.229";
             try
             {
                 MailMessage mailMsg = new MailMessage(FROM, TO);
@@ -33,7 +33,7 @@ namespace Lamode.Models
                 mailMsg.IsBodyHtml = USE_HTML;
 
                 SmtpClient smtp = new SmtpClient();
-                smtp.Port = 587;
+                smtp.Port = 25;
                 smtp.Host = SMTP_SERVER;
                 smtp.Credentials = new System.Net.NetworkCredential(FROM, FROM_PWD);
                 smtp.Send(mailMsg);
