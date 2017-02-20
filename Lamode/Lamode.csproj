@@ -281,6 +281,7 @@
     <Content Include="css\creative.css" />
     <Content Include="css\creative.min.css" />
     <Content Include="css\Login.css" />
+    <Content Include="css\loginRegistrationCss.css" />
     <Content Include="css\Style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

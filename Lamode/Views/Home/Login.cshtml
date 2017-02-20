@@ -37,6 +37,29 @@
         </div>
     </div>
 }
+<div class="login">
+    <h2 class="login__title">
+        Login
+    </h2>
+    <div class="row login__sociallogin">
+        <div class="col-xs-6 login__sociallogin__svg">
+            <a href="#"><img src="img/twittersignin.svg" /></a>
+        </div>
+        <div class="col-xs-6 login__sociallogin__svg">
+            <a href="#"><img src="img/facebooksignin.svg" /></a>
+        </div>
+    </div>
+    <input class="login__input" type="text" name="username" placeholder="Username">
+    <input class="login__input" type="password" name="pw" placeholder="Password">
+    <input class="login__checkbox" checked="checked" id="remember_1" name="remember" type="checkbox">
+    <label class="remember" for="remember_1">
+        <i class="fa fa-check"></i>
+        <span class="labeltext">Remember me?</span>
+    </label>
+    <button class="login__loginbutton">Log in</button>
+    <a href="#" class="login__forgotpassword">Forgot your password?</a>
+</div>
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")

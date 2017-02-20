@@ -37,3 +37,8 @@ label {
 	font-size: 13px;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+
+input.btn.btn-primary.btn-xl.page-scroll {
+    float: right;
+}

@@ -23,7 +23,18 @@ namespace Lamode.Controllers
             string response = mailer.EmailFromArvixe(
                                        new Message(msg.Sender, msg.Subject, msg.Body));
             ViewBag.Response = response;
-            return View();
+            if (response == "Success! Your email has been sent.  Please allow up to 48 hrs for a reply.")
+            {
+                return RedirectToAction("Message", new { msg = ViewBag.Response });
+            }
+            else
+            {
+                return RedirectToAction("Index","Home");
+            }
+
+
+
+
         }
 
     }

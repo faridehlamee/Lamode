@@ -281,19 +281,20 @@
 
                     <div id="contact-area">
 
-                        <form method="post" action="contactengine.php">
-                            <label for="Name">Name:</label>
-                            <input type="text" name="Name" id="Name" />
+                        <form method="post" action="~/Mail/Index">
+                            <label for="Sender">Email:</label>
+                            <input type="text" name="Sender" id="Sender" />
 
-                            <label for="City">City:</label>
-                            <input type="text" name="City" id="City" />
+                            <label for="Subject">Subject:</label>
+                            <input type="text" name="Subject" id="Subject" />
 
-                            <label for="Email">Email:</label>
-                            <input type="text" name="Email" id="Email" />
-
-                            <label for="Message">Message:</label><br />
-                            <textarea name="Message" rows="20" cols="20" id="Message"></textarea>
-                            <input type="submit" name="submit" value="Submit" class="submit-button" />
+                            <label for="Body">Message:</label><br />
+                            <textarea name="Body" rows="30" cols="30" id="Body"></textarea>
+                            <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-xl page-scroll" />
+                            <div>
+                                @Html.Raw(ViewBag.Response)
+                            </div>
+                        
                         </form>
 
 
