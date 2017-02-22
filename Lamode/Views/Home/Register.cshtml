@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Register";
 }
+<link href="~/css/Login.css" rel="stylesheet" />
 <script src="~/js/countryStateCity.js"></script>
 
 @using (Html.BeginForm()) 
@@ -89,22 +90,22 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.country, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        <div align="center">
-                            <h1>JavaScript Country/State Selection Demo</h1>
+                        <div>
+                            @*<h1>JavaScript Country/State Selection Demo</h1>*@
 
-                            <hr />
-                            <br />Select Country:
-                            <select id="country" name="country"></select>
+                          @*  <hr />*@
+                           @* <br />Select Country:*@
+                            <select class="form-control" id="country" name="country"></select>
                            
-                            <br />
+                           @* <br />*@
                             <script language="javascript">
                                 populateCountries("country", "state");
                                 populateCountries("country2");
                             </script>
+                            @*<br />
                             <br />
                             <br />
-                            <br />
-                            <br />
+                            <br />*@
                         </div>
                     </div>
                 </div>
@@ -112,21 +113,21 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.state, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        <div align="center">
+                        <div>
                             
-                            <br />State/Province:
-                            <select name="state" id="state"></select>
+                           @* <br />State/Province:*@
+                            <select class="form-control" name="state" id="state"></select>
 
 
-                            <br />
+                           @* <br />*@
                             <script language="javascript">
                                 populateCountries("country", "state");
                                 populateCountries("country2");
                             </script>
+                            @*<br />
                             <br />
                             <br />
-                            <br />
-                            <br />
+                            <br />*@
                         </div>
                     </div>
                 </div>

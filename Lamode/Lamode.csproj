@@ -303,6 +303,7 @@
     <Content Include="js\countryStateCity.js" />
     <Content Include="js\creative.js" />
     <Content Include="js\creative.min.js" />
+    <Content Include="js\loginRegistrationJS.js" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

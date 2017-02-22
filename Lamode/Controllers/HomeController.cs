@@ -135,10 +135,26 @@ namespace Lamode.Controllers
                     {
                         IsPersistent = false
                     }, identity);
+                    //this part assighn a user role to the loged in user
                     LamodeEntities context = new LamodeEntities();
-                    var user = context.AspNetUsers.Where(u => u.UserName == login.UserName).FirstOrDefault();
+                    AspNetUser user = context.AspNetUsers
+                                     .Where(u => u.UserName == login.UserName).FirstOrDefault();
+                    AspNetRole role1 = context.AspNetRoles
+                                     .Where(r => r.Id == "4").FirstOrDefault();
+                    try
+                    {
+                        user.AspNetRoles.Add(role1);
+                        context.SaveChanges();
+
+                    }
+                    catch
+                    {
+                        ViewBag.ExistedValue = "True";
+                    }
+
                     var role = manager.GetRoles(user.Id);
 
+                    
                     if (role[0] == "Admin")
                     {
                         return RedirectToAction("AdminOnly", "Home", new { @id = user.Id });
@@ -152,9 +168,14 @@ namespace Lamode.Controllers
                         return RedirectToAction("SpecialUser", "Home",  new { @id = user.Id });
                     }
                 }
+                else
+                {
+                    ViewBag.ErrorLoginMessage = "Your user name or password is invalid. Try again!";
+                    return View();
+                }
                 return RedirectToAction("SecureArea", "Home");
                 }
-   
+
             return View();
         }
         
@@ -253,7 +274,7 @@ namespace Lamode.Controllers
             {
                 return View();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("SecureArea", "Home");
         }
         [HttpPost]
         public ActionResult MoreRegisterationForIndividuals(RegisteredUser newUser, string Id)
