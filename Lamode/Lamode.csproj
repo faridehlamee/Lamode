@@ -282,7 +282,9 @@
     <Content Include="css\creative.min.css" />
     <Content Include="css\Login.css" />
     <Content Include="css\loginRegistrationCss.css" />
+    <Content Include="css\simple-sidebar.css" />
     <Content Include="css\Style.css" />
+    <Content Include="css\UserProfileCss.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="img\1.jpg" />
@@ -300,10 +302,13 @@
     <Content Include="img\portfolio\thumbnails\1.jpg" />
     <Content Include="img\portfolio\thumbnails\4.jpg" />
     <Content Include="img\portfolio\thumbnails\5.jpg" />
+    <Content Include="js\bootstrap.min.js" />
     <Content Include="js\countryStateCity.js" />
     <Content Include="js\creative.js" />
     <Content Include="js\creative.min.js" />
+    <Content Include="js\jquery.js" />
     <Content Include="js\loginRegistrationJS.js" />
+    <Content Include="js\UserProfileJavaScript.js" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -488,7 +493,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\SecureArea.cshtml" />
+    <Content Include="Views\Home\SecureArea1.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\BeforeRegister.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
@@ -503,6 +508,8 @@
     <Content Include="Views\Image\AddImage.cshtml" />
     <Content Include="Views\Home\ConfirmEmail.cshtml" />
     <Content Include="Views\Mail\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutUser.cshtml" />
+    <Content Include="Views\Home\SecureArea.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

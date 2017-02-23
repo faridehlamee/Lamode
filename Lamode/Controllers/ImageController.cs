@@ -36,7 +36,7 @@ namespace Lamode.Controllers
             db.Photos.Add(model);
             db.SaveChanges();
 
-            return View(model);
+            return RedirectToAction("SecureArea","Home");
         }
 
 

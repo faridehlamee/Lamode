@@ -1,12 +1,13 @@
 ﻿
 @{
     ViewBag.Title = "SecureArea";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
 <h2>SecureArea</h2>
 
 <div>
     @Html.ActionLink("Logout", "Logout")
-    @Html.ActionLink("AddImage", "AddImage", new { ViewBag.AdminUser })
+    @Html.ActionLink("AddImage", "AddImage", "Image", new { ViewBag.AdminUser }, null)
 
 </div>
