@@ -58,6 +58,7 @@
                             </li>
 
                         }
+
                         if (User.Identity.IsAuthenticated)
                         {
 
@@ -80,14 +81,22 @@
                                 </a>
                             </li>
                         }
+
                     }
                 </ul>
+               @*@{
+                   if (User.IsInRole("User"))
+                   {
+                    @Html.Partial("_LayoutUserPartial")
+                   }
+
+                 }*@ 
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
     </nav>
-    <div class="container body-content">
+ <div class="container body-content">
         @RenderBody()
        
         <footer>
