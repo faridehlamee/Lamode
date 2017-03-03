@@ -29,25 +29,41 @@
                     
                 </li>
                 <li>
-                    <a href="#">Dashboard</a>
+                    @*<a href="#">Dashboard</a>*@
+                    <img src="~/img/userprofilepic.png" alt="User Profile picture" height="42" width="42">
+                </li>
+                
+                <li>
+                   @* @Html.ActionLink("Add Photo", "AddImage", "Image", new { ViewBag.AdminUser }, null)*@
+                    <a href="@Url.Action("AddImage", "Image", new { ViewBag.Id }, null)">
+                        <span class="glyphicon glyphicon-camera fa-fw"></span>
+                        Add Photo
+                    </a>
                 </li>
                 <li>
-                    @Html.ActionLink("Add Image", "AddImage", "Image", new { ViewBag.AdminUser }, null)
+                    @*@Html.ActionLink("View", "Index", "Search")*@
+                    <a href="@Url.Action("Index", "Search")">
+                        <span class="glyphicon glyphicon-eye-open fa-fw"></span>
+                        View
+                    </a>
                 </li>
                 <li>
-                    @Html.ActionLink("Search a user", "Index", "Search")
+                    <a href="@Url.Action("Index", "Event")">
+                        <span class="glyphicon glyphicon-time fa-fw"></span>
+                        Event
+                    </a>
                 </li>
                 <li>
-                    <a href="#">Events</a>
+                    <a href="@Url.Action("Index", "About")">
+                        <span class="glyphicon glyphicon-info-sign fa-fw"></span>
+                        About
+                    </a>
                 </li>
                 <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
+                    <a href="@Url.Action("Index", "Contact")">
+                        <span class="glyphicon glyphicon-earphone fa-fw"></span>
+                        Contact
+                    </a>
                 </li>
             </ul>
         </div>
@@ -57,9 +73,20 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Simple Sidebar</h1>
-                        <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+                        @{
+                            if (ViewBag.TitrlePage == "List of users ")
+                            {
+                                <h1>List of users</h1>
+                            }
+                            else if(ViewBag.TitrlePage == "Upload your photos ")
+                            {
+                                <h1>Upload your photos up to 15</h1>
+                            }
+                            else {
+                                <h1>Dashboard</h1>
+                            }
+                        }
+                     
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                     </div>
                 </div>

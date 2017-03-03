@@ -141,6 +141,7 @@ namespace Lamode.Controllers
                                      .Where(u => u.UserName == login.UserName).FirstOrDefault();
                     AspNetRole role1 = context.AspNetRoles
                                      .Where(r => r.Id == "4").FirstOrDefault();
+                 
                     try
                     {
                         user.AspNetRoles.Add(role1);
@@ -173,7 +174,7 @@ namespace Lamode.Controllers
                     ViewBag.ErrorLoginMessage = "Your user name or password is invalid. Try again!";
                     return View();
                 }
-                return RedirectToAction("SecureArea", "Home");
+                return RedirectToAction("SecureArea", new { @id = identityUser.Id } );
                 }
 
             return View();
@@ -309,8 +310,9 @@ namespace Lamode.Controllers
         }
 
         [Authorize]
-        public ActionResult SecureArea()
+        public ActionResult SecureArea(string id)
         {
+            ViewBag.Id = id;
             return View();
         }
 
@@ -368,7 +370,7 @@ namespace Lamode.Controllers
         // [Authorize(Roles="Admin, Staff")]
         public ActionResult AdminOnly(string Id)
         {
-            ViewBag.AdminUser = Id;
+            ViewBag.Id = Id;
             return View();
         }
 

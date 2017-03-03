@@ -3,43 +3,80 @@
 @{
     ViewBag.Title = "Index";
 }
+@{
+    if (User.IsInRole("User"))
+    {
+        ViewBag.TitrlePage = "List of users ";
+        @Html.Partial("_LayoutUserPartial")
+<table class="table table-responsive table-hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="hidden-sm hidden-xs">
+                @Html.ActionLink("Email", "Index", new { sortOrder = ViewBag.DateSortParm }, new { @class = "col" })
+            </th>
 
-<h2>Index</h2>
-<table class="table">
-    <tr>
-        <th>
-        @Html.ActionLink("Email", "Index", new { sortOrder = ViewBag.DateSortParm })
-        </th>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        
-        <th>
-        @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.NameSortParm })
-        </th>
-       
-    </tr>
+            <th class="hidden-sm hidden-xs">
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+            <th class="hidden-sm hidden-xs">
+                @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.NameSortParm }, new { @class = "col" })
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <td class="hidden-sm hidden-xs">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
 
+                <td class="hidden-sm hidden-xs">
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+
+                <td class="hidden-sm hidden-xs">
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td class="hidden-sm hidden-xs">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+        }
+    }

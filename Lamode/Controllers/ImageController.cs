@@ -21,6 +21,7 @@ namespace Lamode.Controllers
         {
             LamodeEntities db = new LamodeEntities();
             Photo photo = new Photo();
+         //   Id = TempData["LogedInUser"];
             var p1 = db.Photos.Where(p => p.Id == Id).Count();
             if (image1 != null && p1 <= 15)
             {

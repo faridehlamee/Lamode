@@ -3,6 +3,7 @@
     ViewBag.Title = "SecureArea";
 }
 @{
+   
     if (User.IsInRole("User"))
     {
         @Html.Partial("_LayoutUserPartial")
